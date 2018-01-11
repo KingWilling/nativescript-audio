@@ -434,7 +434,9 @@ export class TNSPlayer implements TNSPlayerI {
             // Lower the volume, keep playing
             this._lastPlayerVolume = this.volume;
             TNS_Player_Log("this._lastPlayerVolume", this._lastPlayerVolume);
-            this._player.setVolume(0.2, 0.2);
+            if (this._player != null) {
+              this._player.setVolume(0.2, 0.2);
+            }
             break;
         }
       }
