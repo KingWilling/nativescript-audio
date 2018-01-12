@@ -404,6 +404,12 @@ export class TNSPlayer implements TNSPlayerI {
             TNS_Player_Log("AUDIOFOCUS_GAIN");
             // Set volume level to desired levels
             TNS_Player_Log("this._lastPlayerVolume", this._lastPlayerVolume);
+
+            // If there's no MediaPlayer we need to return to prevent any null/undefined reference errors.
+            if (!this._player) {
+              return;
+            }
+
             // if last volume more than 10 just set to 1.0 float
             if (this._lastPlayerVolume && this._lastPlayerVolume >= 10) {
               this._player.setVolume(1.0, 1.0);
@@ -434,7 +440,7 @@ export class TNSPlayer implements TNSPlayerI {
             // Lower the volume, keep playing
             this._lastPlayerVolume = this.volume;
             TNS_Player_Log("this._lastPlayerVolume", this._lastPlayerVolume);
-            if (this._player != null) {
+            if (this._player) {
               this._player.setVolume(0.2, 0.2);
             }
             break;
